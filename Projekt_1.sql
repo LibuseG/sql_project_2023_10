@@ -9,15 +9,10 @@ JOIN
 	czechia_payroll cp2 
 ON YEAR(cp.date_from) = cp2.payroll_year AND
     cp2.value_type_code = 5958 AND 
-    AND calculation_code=200
+    calculation_code = 200
 JOIN
 	czechia_payroll_industry_branch cpib  
 ON cpib.code = cp2.industry_branch_code
-JOIN 
-	economies e 
-	ON YEAR(cp.date_from) = e.`year`  AND
-    e.country  = 'Czech republic'
-ORDER BY name, payroll_year
 ;
 
 
