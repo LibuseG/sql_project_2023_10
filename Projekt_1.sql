@@ -1,13 +1,24 @@
 
-
+create OR REPLACE TABLE t_libuse_gregorova_project_SQL_primary_final as
 SELECT
-    name, value AS avg_payroll, payroll_year, payroll_quarter 
-FROM czechia_payroll_industry_branch cpib 
-LEFT JOIN
-czechia_payroll cp 
-ON cpib.code = cp.industry_branch_code
-WHERE value IS NOT NULL AND value_type_code = 5958
-ORDER BY name, payroll_year, payroll_quarter ;
+    cpib.name, cp2.value AS avg_payroll, cp2.payroll_year, cpc.name AS food_category, cpc.price_value, cpc.price_unit, cp.value AS price
+FROM czechia_price cp 
+JOIN czechia_price_category cpc
+    ON cp.category_code = cpc.code
+JOIN 
+	czechia_payroll cp2 
+ON YEAR(cp.date_from) = cp2.payroll_year AND
+    cp2.value_type_code = 5958 AND 
+    AND calculation_code=200
+JOIN
+	czechia_payroll_industry_branch cpib  
+ON cpib.code = cp2.industry_branch_code
+JOIN 
+	economies e 
+	ON YEAR(cp.date_from) = e.`year`  AND
+    e.country  = 'Czech republic'
+ORDER BY name, payroll_year
+;
 
 
 
@@ -27,5 +38,3 @@ ORDER BY name, payroll_year, payroll_quarter ;
 
 
 
-
-ctreate TABLE t_libuse_gregorova_project_SQL_primary_final as
