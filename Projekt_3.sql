@@ -6,7 +6,12 @@
 SELECT
     a.name,
     first_year_payroll,
-    last_year_payroll
+    last_year_payroll,
+    CASE  
+    	WHEN last_year_payroll - first_year_payroll > 0 THEN 'increse'
+    	WHEN last_year_payroll - first_year_payroll < 0 THEN 'decrese'
+    	ELSE 'no chage'
+    END payroll_difference
 FROM (
 	SELECT
 	name,
@@ -30,5 +35,6 @@ WHERE payroll_year  IN (
     GROUP BY name
     ) b
 ON a.name = b.name
+ORDER BY payroll_difference desc
 ;
 
