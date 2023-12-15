@@ -6,7 +6,7 @@ Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách p
  
  
  
- SELECT a.YEAR,b.YEAR-1 AS prev_year,
+ SELECT a.YEAR,
  	(b.payroll - a.payroll)/a.payroll AS payroll_change,
  	(b.price - a.price)/a.price AS price_change,
  	(b.GDP_Czech_Republic - a.GDP_Czech_Republic)/a.GDP_Czech_Republic AS GDP_change,
