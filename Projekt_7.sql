@@ -6,7 +6,7 @@ Neboli, pokud HDP vzroste výrazněji v jednom roce, projeví se to na cenách p
  
  
  CREATE OR REPLACE TEMPORARY TABLE czech_republic_data AS (
-	SELECT year, GDP, payroll, avg(value) AS price
+	SELECT year, GDP, avg(payroll) as payroll, avg(value) AS price
 	FROM engeto_2023_10_26.t_libuse_gregorova_project_sql_secondary_final 
 	WHERE country = 'Czech Republic' AND 
 	payroll IS NOT NULL AND 
