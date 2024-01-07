@@ -26,7 +26,7 @@ group BY a.food_category, a.payroll_year
 select food_category, round(avg(year_chng),5) as year_change
 	from food_category_change
 	where year_chng >0
-group by food_category 
+group by year_chng
 order by year_chng asc ;
 
 
